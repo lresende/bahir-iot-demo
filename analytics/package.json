@@ -1,0 +1,13 @@
+{
+  "name": "IDA-6158-analytics",
+  "version": "1.0.0",
+  "description": "",
+  "main": "analytics.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Bryan Boyd",
+  "dependencies": {
+    "mqtt": "^1.7.0"
+  }
+}

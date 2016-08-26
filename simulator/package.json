@@ -1,0 +1,16 @@
+{
+  "name": "IDA-6158-simulator",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Bryan Boyd",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.15.0",
+    "cfenv": "^1.0.3",
+    "express": "^4.13.4"
+  }
+}
