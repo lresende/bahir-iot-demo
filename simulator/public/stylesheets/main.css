@@ -57,6 +57,10 @@ hr {
 	position: relative;
 }
 
+.credentials-container {
+	#position: relative;
+}
+
 .connectionStatus {
 	display: inline-block;
 	font-size: 15px;
@@ -143,6 +147,19 @@ code {
 	padding: 10px 0;
 }
 
+.iot-credentials-input{
+	text-align: left;
+}
+
+.iot-credentials-label{
+	width: 25%;
+	display: inline-block;
+	color: #3f3636;
+	text-align: left;
+	font-size: 20px;
+	line-height: 40px;
+}
+
 .iot-sensor-label {
 	width: 25%;
 	display: inline-block;
@@ -168,6 +185,20 @@ input {
 .iot-controller-input {
 	position: relative;
 	height: 140px;
+}
+
+.iot-config-button {
+	background-color: #ffffff;
+	width: 80px;
+	height: 40px;
+	border: 1px solid #efeaea;
+	color: #fc380a;
+	font-size: 11px;
+	line-height: 40px;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
 }
 
 .iot-button {

@@ -50,6 +50,13 @@ var model = {
 			latitude: null,
 			longitude: null
 		}
+	},
+	credentials:{
+		orgId : null,
+		apiKey : null,
+		apiToken : null,
+		typeId : null,
+		deviceId : null
 	}
 }
 
@@ -88,38 +95,29 @@ function init() {
 		});
 	});
 
-	$.ajax({
-		url: "/credentials",
-		type: "GET",
-		contentType: "application/json; charset=utf-8",
-		dataType: "json",
-		success: function(response) {
-			console.log(response);
-			window.iot_org = response.org;
-			window.iot_apiKey = response.apiKey;
-			window.iot_apiToken = response.apiToken;
-			window.iot_typeId = response.typeId;
-			window.iot_deviceId = response.deviceId;
-			window.iot_host = response.org + ".messaging.internetofthings.ibmcloud.com";
-			window.iot_port = 1883;
-			window.iot_clientid = "d:"+response.org+":"+response.typeId+":"+response.deviceId;
-			window.iot_username = "use-token-auth";
-			window.iot_password = response.authToken;
-			$("#deviceId").html(response.deviceId);
-			window.client = new Paho.MQTT.Client(window.iot_host, window.iot_port, window.iot_clientid);
-			connectDevice();
-			//registerDevice();
-		},
-		error: function(xhr, status, error) {
-			console.error("Could not fetch organization information.");
-		}
+	$(".iot-config-button").click(function(evt) {
+		model.credentials.orgId = $('#orgId').val();
+		model.credentials.apiKey = $('#apiKey').val();
+		model.credentials.apiToken = $('#apiToken').val();
+
+		onConfirmConfig();
 	});
 }
 
 var bRandomize = true;
 
+function getTopicName(eventId){
+	return "iot-2/type/"
+		+ model.credentials.typeId
+		+ "/id/"
+		+ model.credentials.deviceId
+		+ "/evt/"
+		+ eventId
+		+"/fmt/json";
+}
+
 function publishAccel() {
-	var res = publishMessage("iot-2/evt/accel/fmt/json", model.accel);
+	var res = publishMessage(getTopicName("accel"), model.accel);
 	$("#indicator-accel").addClass("pub");
 	setTimeout(function() { $("#indicator-accel").removeClass("pub"); }, 150);
 	if (res) {
@@ -136,7 +134,7 @@ function publishAccel() {
 }
 
 function publishGyro() {
-	var res = publishMessage("iot-2/evt/gyro/fmt/json", model.gyro);
+	var res = publishMessage(getTopicName("gyro"), model.gyro);
 	$("#indicator-gyro").addClass("pub");
 	setTimeout(function() { $("#indicator-gyro").removeClass("pub"); }, 150);
 	if (res) {
@@ -153,7 +151,7 @@ function publishGyro() {
 }
 
 function publishMag() {
-	var res = publishMessage("iot-2/evt/mag/fmt/json", model.mag);
+	var res = publishMessage(getTopicName("mag"), model.mag);
 	$("#indicator-mag").addClass("pub");
 	setTimeout(function() { $("#indicator-mag").removeClass("pub"); }, 150);
 	if (res) {
@@ -170,7 +168,7 @@ function publishMag() {
 }
 
 function publishTemp() {
-	var res = publishMessage("iot-2/evt/temp/fmt/json", model.temp);
+	var res = publishMessage(getTopicName("temp"), model.temp);
 	$("#indicator-temp").addClass("pub");
 	setTimeout(function() { $("#indicator-temp").removeClass("pub"); }, 150);
 	if (res) {
@@ -183,7 +181,7 @@ function publishTemp() {
 }
 
 function publishSys() {
-	var res = publishMessage("iot-2/evt/sys/fmt/json", model.sys);
+	var res = publishMessage(getTopicName("sys"), model.sys);
 	$("#indicator-sys").addClass("pub");
 	setTimeout(function() { $("#indicator-sys").removeClass("pub"); }, 150);
 	if (res) {
@@ -223,6 +221,64 @@ function startPublish() {
 		publishTemp();
 		publishSys();
 	}
+}
+
+
+function onConfirmConfig(){
+	$.ajax({
+		url: "/config",
+		type: "PUT",
+		contentType: "application/json; charset=utf-8",
+		dataType: "json",
+		data: JSON.stringify({
+			orgId : model.credentials.orgId,
+			apiKey : model.credentials.apiKey,
+			apiToken : model.credentials.apiToken
+		}),
+		success: function(response) {
+			console.log(response);
+
+			$.ajax({
+				url: "/credentials",
+				type: "GET",
+				contentType: "application/json; charset=utf-8",
+				dataType: "json",
+				success: function(response) {
+					console.log(response);
+					window.iot_org = response.org;
+					window.iot_apiKey = response.apiKey;
+					window.iot_apiToken = response.apiToken;
+					window.iot_typeId = response.typeId;
+					window.iot_deviceId = response.deviceId;
+					window.iot_host = response.org + ".messaging.internetofthings.ibmcloud.com";
+					window.iot_port = 1883;
+					//window.iot_clientid = "a:"+response.org+":"+response.typeId+":"+response.deviceId;
+					window.iot_clientid = "a:"+response.org+":"+"123243432423423";
+					//window.iot_username = "use-token-auth";
+					window.iot_username = response.apiKey;
+					window.iot_password = response.apiToken;
+					$("#deviceId").html(response.deviceId);
+					window.client = new Paho.MQTT.Client(window.iot_host, window.iot_port, window.iot_clientid);
+
+					model.credentials.typeId = response.typeId;
+					model.credentials.deviceId = response.deviceId;
+
+					connectDevice();
+					//registerDevice();
+				},
+				error: function(xhr, status, error) {
+					console.error("Could not fetch organization information.");
+				}
+			});
+
+		},
+		error: function(xhr, status, error) {
+			console.error(xhr, status, error);
+		}
+	});
+
+
+
 }
 
 function onConnectSuccess() {

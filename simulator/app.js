@@ -10,6 +10,10 @@ app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.json());
 var appEnv = cfenv.getAppEnv();
 
+var session = require('express-session');
+app.use(session({ secret: 'worldofwatson', resave: false,
+	saveUninitialized: true}))
+
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 
 var config = null;
@@ -23,8 +27,27 @@ var options = {
 	auth: credentials.apiKey + ':' + credentials.apiToken
 };
 
+app.put('/config', function(req, res){
+
+	if(!req.session.credentials){
+		console.log('No session yet. Creating one...');
+		req.session.credentials={};
+	}
+
+	credentials.org = req.body.orgId;
+	credentials.apiKey = req.body.apiKey;
+	credentials.apiToken = req.body.apiToken;
+
+	req.session.credentials = credentials;
+	req.session.save();
+
+	console.log('Credentials set on session.');
+
+	res.status(200).send('{}');
+});
+
 app.get('/credentials', function(req, res) {
-	res.json(credentials);
+	res.json(req.session.credentials);
 });
 
 app.put('/updateDeviceLocation', function(req, res) {
