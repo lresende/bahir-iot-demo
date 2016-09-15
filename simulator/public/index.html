@@ -52,67 +52,34 @@
 		<div class="row">
 			<div class="col-xs-12 col-sm-6">
 				<div class="iot-input-group">
-					<h3>Accelerometer</h3>
+					<h3>Weight</h3>
 					<div class="iot-input-container">
-						<div class="iot-topic-container"><div class="iot-topic"><b>Topic:</b> <code>iot-2/evt/accel/fmt/json</code></div><div class='iot-rate hidden-sm'><b>Rate:</b> <code>2 msgs/sec</code></div><div class='iot-indicator' id="indicator-accel">&nbsp;</div></div>
+						<div class="iot-topic-container"><div class="iot-topic"><b>Topic:</b> <code>iot-2/evt/weight/fmt/json</code></div><div class='iot-rate hidden-sm'><b>Rate:</b> <code>2 msgs/sec</code></div><div class='iot-indicator' id="indicator-weight">&nbsp;</div></div>
 						<div class="iot-stat">
-							<div class="iot-sensor-label">X</div><input id="accel-x" data-slider-id='accel-x-slider' type="text" data-slider-min="-2" data-slider-max="2" data-slider-step="0.01" data-slider-value="0"/>
-						</div>
-						<div class="iot-stat">
-							<div class="iot-sensor-label">Y</div><input id="accel-y" data-slider-id='accel-y-slider' type="text" data-slider-min="-2" data-slider-max="2" data-slider-step="0.01" data-slider-value="0"/>
-						</div>
-						<div class="iot-stat">
-							<div class="iot-sensor-label">Z</div><input id="accel-z" data-slider-id='accel-z-slider' type="text" data-slider-min="-2" data-slider-max="2" data-slider-step="0.01" data-slider-value="0"/>
+							<div class="iot-sensor-label">Lb</div><input id="weight" data-slider-id='weight-slider' type="text" data-slider-min="-2" data-slider-max="2" data-slider-step="0.01" data-slider-value="0"/>
 						</div>
 					</div>
 				</div>
 				<div class="iot-input-group">
-					<h3>Gyroscope</h3>
+					<h3>Speed</h3>
 					<div class="iot-input-container">
-						<div class="iot-topic-container"><div class="iot-topic"><b>Topic:</b> <code>iot-2/evt/gyro/fmt/json</code></div><div class='iot-rate hidden-sm'><b>Rate:</b> <code>2 msgs/sec</code></div><div class='iot-indicator' id="indicator-gyro">&nbsp;</div></div>
+						<div class="iot-topic-container"><div class="iot-topic"><b>Topic:</b> <code>iot-2/evt/speed/fmt/json</code></div><div class='iot-rate hidden-sm'><b>Rate:</b> <code>2 msgs/sec</code></div><div class='iot-indicator' id="indicator-speed">&nbsp;</div></div>
 						<div class="iot-stat">
-							<div class="iot-sensor-label">X</div><input id="gyro-x" data-slider-id='gyro-x-slider' type="text" data-slider-min="-245" data-slider-max="245" data-slider-step="1" data-slider-value="0"/>
-						</div>
-						<div class="iot-stat">
-							<div class="iot-sensor-label">Y</div><input id="gyro-y" data-slider-id='gyro-y-slider' type="text" data-slider-min="-245" data-slider-max="245" data-slider-step="1" data-slider-value="0"/>
-						</div>
-						<div class="iot-stat">
-							<div class="iot-sensor-label">Z</div><input id="gyro-z" data-slider-id='gyro-z-slider' type="text" data-slider-min="-245" data-slider-max="245" data-slider-step="1" data-slider-value="0"/>
+							<div class="iot-sensor-label">m/s</div><input id="speed" data-slider-id='speed-slider' type="text" data-slider-min="-245" data-slider-max="245" data-slider-step="1" data-slider-value="0"/>
 						</div>
 					</div>
 				</div>
 				<div class="iot-input-group">
-					<h3>Magnetometer</h3>
+					<h3>Power</h3>
 					<div class="iot-input-container">
-						<div class="iot-topic-container"><div class="iot-topic"><b>Topic:</b> <code>iot-2/evt/mag/fmt/json</code></div><div class='iot-rate hidden-sm'><b>Rate:</b> <code>2 msgs/sec</code></div><div class='iot-indicator' id="indicator-mag">&nbsp;</div></div>
+						<div class="iot-topic-container"><div class="iot-topic"><b>Topic:</b> <code>iot-2/evt/power/fmt/json</code></div><div class='iot-rate hidden-sm'><b>Rate:</b> <code>2 msgs/sec</code></div><div class='iot-indicator' id="indicator-power">&nbsp;</div></div>
 						<div class="iot-stat">
-							<div class="iot-sensor-label">X</div><input id="mag-x" data-slider-id='mag-x-slider' type="text" data-slider-min="-2" data-slider-max="2" data-slider-step="0.01" data-slider-value="0"/>
-						</div>
-						<div class="iot-stat">
-							<div class="iot-sensor-label">Y</div><input id="mag-y" data-slider-id='mag-y-slider' type="text" data-slider-min="-2" data-slider-max="2" data-slider-step="0.01" data-slider-value="0"/>
-						</div>
-						<div class="iot-stat">
-							<div class="iot-sensor-label">Z</div><input id="mag-z" data-slider-id='mag-z-slider' type="text" data-slider-min="-2" data-slider-max="2" data-slider-step="0.01" data-slider-value="0"/>
+							<div class="iot-sensor-label">Kw</div><input id="power" data-slider-id='power-slider' type="text" data-slider-min="-2" data-slider-max="2" data-slider-step="0.01" data-slider-value="0"/>
 						</div>
 					</div>
 				</div>
 			</div>
 			<div class="col-xs-12 col-sm-6">
-				<div class="iot-input-group">
-					<h3>Input</h3>
-					<div class="iot-input-container">
-						<div class="iot-topic-container"><div class="iot-topic"><b>Topic:</b> <code>iot-2/evt/input/fmt/json</code></div><div class='iot-rate hidden-sm'><b>Rate:</b> <code>on event</code></div><div class='iot-indicator' id="indicator-input">&nbsp;</div></div>
-						<div class="iot-controller-input">
-							<div class="iot-button" id="button-UP">&#9650;</div>
-							<div class="iot-button" id="button-DOWN">&#9660;</div>
-							<div class="iot-button" id="button-LEFT">&#9664;</div>
-							<div class="iot-button" id="button-RIGHT">&#9654;</div>
-							<div class="iot-button" id="button-SELECT">&nbsp;</div>
-							<div class="iot-button" id="button-A">A</div>
-							<div class="iot-button" id="button-B">B</div>
-						</div>
-					</div>
-				</div>
 				<div class="iot-input-group">
 					<h3>Temperature</h3>
 					<div class="iot-input-container">
@@ -131,15 +98,6 @@
 						</div>
 						<div class="iot-stat">
 							<div class="iot-sensor-label">Mem (free)</div><input id="memory" data-slider-id='cpu-slider' type="text" data-slider-min="0" data-slider-max="1000000000" data-slider-step="100" data-slider-value="459831200"/>
-						</div>
-						<div class="iot-stat">
-							<div class="iot-sensor-label">wlan0</div><input id="wlan0" type="text" value="192.168.0.1" />
-						</div>
-						<div class="iot-stat">
-							<div class="iot-sensor-label">latitude</div><input id="latitude" type="text" value="" />
-						</div>
-						<div class="iot-stat">
-							<div class="iot-sensor-label">longitude</div><input id="longitude" type="text" value="" />
 						</div>
 					</div>
 				</div>

@@ -15,41 +15,21 @@ var iot_password;
 var isConnected = false;
 
 var model = {
-	accel: {
-		x: 0,
-		y: 0,
-		z: 0
+	weight:{
+		weight: 100,
 	},
-	gyro: {
-		x: 0,
-		y: 0,
-		z: 0
+	speed:{
+		speed: 10,
 	},
-	mag: {
-		x: 0,
-		y: 0,
-		z: 0
+	power:{
+		power:50
 	},
 	temp: {
 		temp: 10,
 	},
-	input: {
-		UP: false,
-		DOWN: false,
-		LEFT: false,
-		RIGHT: false,
-		SELECT: false,
-		A: false,
-		B: false
-	},
 	sys: {
 		cpuLoadAvg: 0.25,
-		freeMemory: 485908145,
-		wlan0: "192.168.1.243",
-		location: {
-			latitude: null,
-			longitude: null
-		}
+		freeMemory: 485908145
 	},
 	credentials:{
 		orgId : null,
@@ -61,39 +41,12 @@ var model = {
 }
 
 function init() {
-	$('#accel-x').slider({ formatter: function(value) { model.accel.x = value; return value; } });
-	$('#accel-y').slider({ formatter: function(value) { model.accel.y = value; return value; } });
-	$('#accel-z').slider({ formatter: function(value) { model.accel.z = value; return value; } });
-	$('#gyro-x').slider({ formatter: function(value) { model.gyro.x = value; return value; } });
-	$('#gyro-y').slider({ formatter: function(value) { model.gyro.y = value; return value; } });
-	$('#gyro-z').slider({ formatter: function(value) { model.gyro.z = value; return value; } });
-	$('#mag-x').slider({ formatter: function(value) { model.mag.x = value; return value; } });
-	$('#mag-y').slider({ formatter: function(value) { model.mag.y = value; return value; } });
-	$('#mag-z').slider({ formatter: function(value) { model.mag.z = value; return value; } });
+	$('#weight').slider({ formatter: function(value) { model.weight.weight = value; return value; } });
+	$('#speed').slider({ formatter: function(value) { model.speed.speed = value; return value; } });
+	$('#power').slider({ formatter: function(value) { model.power.power = value; return value; } });
 	$('#temp').slider({ formatter: function(value) { model.temp.temp = value; return value; } });
 	$('#cpu').slider({ formatter: function(value) { model.sys.cpuLoadAvg = value; return value; } });
 	$('#memory').slider({ formatter: function(value) { model.sys.freeMemory = value; return value; } });
-
-	$(".iot-button").mousedown(function(evt) {
-		var inputType = evt.target.id.split("-")[1];
-		model.input[inputType] = true;
-		$(evt.target).addClass("iot-button-down");
-		publishInput();
-		$(".iot-controller-input").mouseup(function(evt) {
-			model.input[inputType] = false;
-			$("#button-"+inputType).removeClass("iot-button-down");
-			publishInput();
-			$(".iot-controller-input").off("mouseup");
-			$(".iot-controller-input").off("mouseleave");
-		});
-		$(".iot-controller-input").mouseleave(function(evt) {
-			model.input[inputType] = false;
-			$("#button-"+inputType).removeClass("iot-button-down");
-			publishInput();
-			$(".iot-controller-input").off("mouseup");
-			$(".iot-controller-input").off("mouseleave");
-		});
-	});
 
 	$(".iot-config-button").click(function(evt) {
 		model.credentials.orgId = $('#orgId').val();
@@ -116,54 +69,42 @@ function getTopicName(eventId){
 		+"/fmt/json";
 }
 
-function publishAccel() {
-	var res = publishMessage(getTopicName("accel"), model.accel);
-	$("#indicator-accel").addClass("pub");
-	setTimeout(function() { $("#indicator-accel").removeClass("pub"); }, 150);
+function publishWeight() {
+	var res = publishMessage(getTopicName("weight"), model.weight);
+	$("#indicator-weight").addClass("pub");
+	setTimeout(function() { $("#indicator-weight").removeClass("pub"); }, 150);
 	if (res) {
 		if (bRandomize) {
-			model.accel.x += -0.1 + Math.random() * 0.2;
-			model.accel.y += -0.1 + Math.random() * 0.2;
-			model.accel.z += -0.1 + Math.random() * 0.2;
-			$('#accel-x').slider('setValue', model.accel.x);
-			$('#accel-y').slider('setValue', model.accel.y);
-			$('#accel-z').slider('setValue', model.accel.z);
+			model.weight.weight += -0.1 + Math.random() * 0.2;
+			$('#weight').slider('setValue', model.weight.weight);
 		}
-		setTimeout(publishAccel, 500);
+		setTimeout(publishWeight, 500);
 	}
 }
 
-function publishGyro() {
-	var res = publishMessage(getTopicName("gyro"), model.gyro);
-	$("#indicator-gyro").addClass("pub");
-	setTimeout(function() { $("#indicator-gyro").removeClass("pub"); }, 150);
+function publishSpeed() {
+	var res = publishMessage(getTopicName("speed"), model.speed);
+	$("#indicator-speed").addClass("pub");
+	setTimeout(function() { $("#indicator-speed").removeClass("pub"); }, 150);
 	if (res) {
 		if (bRandomize) {
-			model.gyro.x += -5 + Math.random() * 10;
-			model.gyro.y += -5 + Math.random() * 10;
-			model.gyro.z += -5 + Math.random() * 10;
-			$('#gyro-x').slider('setValue', model.gyro.x);
-			$('#gyro-y').slider('setValue', model.gyro.y);
-			$('#gyro-z').slider('setValue', model.gyro.z);
+			model.speed.speed += -5 + Math.random() * 10;
+			$('#speed').slider('setValue', model.speed.speed);
 		}
-		setTimeout(publishGyro, 500);
+		setTimeout(publishSpeed, 500);
 	}
 }
 
-function publishMag() {
-	var res = publishMessage(getTopicName("mag"), model.mag);
-	$("#indicator-mag").addClass("pub");
-	setTimeout(function() { $("#indicator-mag").removeClass("pub"); }, 150);
+function publishPower() {
+	var res = publishMessage(getTopicName("power"), model.power);
+	$("#indicator-power").addClass("pub");
+	setTimeout(function() { $("#indicator-power").removeClass("pub"); }, 150);
 	if (res) {
 		if (bRandomize) {
-			model.mag.x += -0.1 + Math.random() * 0.2;
-			model.mag.y += -0.1 + Math.random() * 0.2;
-			model.mag.z += -0.1 + Math.random() * 0.2;
-			$('#mag-x').slider('setValue', model.mag.x);
-			$('#mag-y').slider('setValue', model.mag.y);
-			$('#mag-z').slider('setValue', model.mag.z);
+			model.power.power += -0.1 + Math.random() * 0.2;
+			$('#power').slider('setValue', model.power.power);
 		}
-		setTimeout(publishMag, 500);
+		setTimeout(publishPower, 500);
 	}
 }
 
@@ -195,12 +136,6 @@ function publishSys() {
 	}
 }
 
-function publishInput() {
-	$("#indicator-input").addClass("pub");
-	setTimeout(function() { $("#indicator-input").removeClass("pub"); }, 150);
-	publishMessage("iot-2/evt/input/fmt/json", model.input);
-}
-
 function publishMessage(topic, payload) {
 	try {
 		var message = new Paho.MQTT.Message(JSON.stringify({ d: payload }));
@@ -215,10 +150,10 @@ function publishMessage(topic, payload) {
 
 function startPublish() {
 	if (isConnected) {
-		publishAccel();
-		publishGyro();
-		publishMag();
+		publishWeight();
 		publishTemp();
+		publishSpeed();
+		publishPower();
 		publishSys();
 	}
 }
@@ -252,7 +187,7 @@ function onConfirmConfig(){
 					window.iot_deviceId = response.deviceId;
 					window.iot_host = response.org + ".messaging.internetofthings.ibmcloud.com";
 					window.iot_port = 1883;
-					//window.iot_clientid = "a:"+response.org+":"+response.typeId+":"+response.deviceId;
+					//window.iot_clientid = "d:"+response.org+":"+response.typeId+":"+response.deviceId;
 					window.iot_clientid = "a:"+response.org+":"+"123243432423423";
 					//window.iot_username = "use-token-auth";
 					window.iot_username = response.apiKey;
@@ -290,17 +225,10 @@ function onConnectSuccess() {
 
 	if (navigator.geolocation) {
 		navigator.geolocation.getCurrentPosition(function(position) {
-			model.sys.location.latitude = position.coords.latitude.toFixed(6);
-			model.sys.location.longitude = position.coords.longitude.toFixed(6);
 			console.log(position);
-			$("#latitude").val(model.sys.location.latitude);
-			$("#longitude").val(model.sys.location.longitude);
-			setDeviceLocation();
 			startPublish();
 		});
 	} else {
-		$("#latitude").val("n/a");
-		$("#longitude").val("n/a");
 		startPublish();
 	}
 }
@@ -325,25 +253,6 @@ function connectDevice() {
 		onFailure: onConnectFailure,
 		userName: window.iot_username,
 		password: window.iot_password
-	});
-}
-
-function setDeviceLocation() {
-	$.ajax({
-		url: "/updateDeviceLocation",
-		type: "PUT",
-		contentType: "application/json; charset=utf-8",
-		dataType: "json",
-		data: JSON.stringify({
-			latitude: model.sys.location.latitude,
-			longitude: model.sys.location.longitude
-		}),
-		success: function(response) {
-			console.log(response);
-		},
-		error: function(xhr, status, error) {
-			console.error(xhr, status, error);
-		}
 	});
 }
 
