@@ -1,0 +1,15 @@
+# Mac
+.DS_Store
+
+# Intellij
+.idea/
+.idea_modules/
+*.iml
+*.iws
+
+
+# Dependency directories
+node_modules
+
+# Optional npm cache directory
+.npm
