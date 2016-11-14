@@ -8,9 +8,9 @@ var deviceId = credentials.deviceId;
 // credentials for application connection
 var clientId = "a:"+credentials.org+":analytics-app-"+Math.floor(Math.random() * 100000);
 
-var host = credentials.org + ".messaging.internetofthings.ibmcloud.com";
-var port = 1883;
-var endpoint = "mqtt://"+host+":"+port;
+var host = "localhost" // credentials.org + ".messaging.internetofthings.ibmcloud.com";
+var port = 9001;
+var endpoint = "ws://"+host+":"+port;
 
 var client = null;
 var bConnected = false;
