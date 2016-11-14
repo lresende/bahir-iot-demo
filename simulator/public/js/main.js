@@ -149,7 +149,9 @@ function publishMessage(topic, payload) {
 }
 
 function startPublish() {
+	console.log("Should publish ? " + isConnected)
 	if (isConnected) {
+		console.log("Publishing... ")
 		publishWeight();
 		publishTemp();
 		publishSpeed();
@@ -185,14 +187,15 @@ function onConfirmConfig(){
 					window.iot_apiToken = response.apiToken;
 					window.iot_typeId = response.typeId;
 					window.iot_deviceId = response.deviceId;
-					window.iot_host = response.org + ".messaging.internetofthings.ibmcloud.com";
-					window.iot_port = 1883;
+					window.iot_host = "localhost" // response.org + ".messaging.internetofthings.ibmcloud.com";
+					window.iot_port = 9001;
 					//window.iot_clientid = "d:"+response.org+":"+response.typeId+":"+response.deviceId;
 					window.iot_clientid = "a:"+response.org+":"+"123243432423423";
 					//window.iot_username = "use-token-auth";
 					window.iot_username = response.apiKey;
 					window.iot_password = response.apiToken;
 					$("#deviceId").html(response.deviceId);
+					// window.client = new Paho.MQTT.Client(window.iot_host, window.iot_port, window.iot_clientid);
 					window.client = new Paho.MQTT.Client(window.iot_host, window.iot_port, window.iot_clientid);
 
 					model.credentials.typeId = response.typeId;
@@ -233,9 +236,12 @@ function onConnectSuccess() {
 	}
 }
 
-function onConnectFailure() {
+function onConnectFailure( error ) {
 	// The device failed to connect. Let's try again in one second.
 	console.log("Unable to connect to IoT Foundation! Trying again in one second.");
+	console.log( error.errorCode );
+	console.log( error.errorMessage );
+
 	isConnected = false;
 	$(".connectionStatus").html("Connecting");
 	$(".connectionStatus").removeClass("connected");
@@ -250,9 +256,9 @@ function connectDevice() {
 	console.log("Connecting device to IoT Foundation...");
 	window.client.connect({
 		onSuccess: onConnectSuccess,
-		onFailure: onConnectFailure,
-		userName: window.iot_username,
-		password: window.iot_password
+		onFailure: onConnectFailure
+		// userName: window.iot_username,
+		// password: window.iot_password
 	});
 }
 
