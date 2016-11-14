@@ -14,7 +14,7 @@
 			<div class="col-xs-12">
 				<div class="iot-root-navigation">
 					<div class="navbar-header">
-						<span class="navbar-brand iotf-brand" href="https://internetofthings.ibmcloud.com">IBM <strong>Watson IoT</strong> Platform</span>
+						<span class="navbar-brand iotf-brand" href="https://bahir.apache.org"><strong>Apache Bahir</strong> IoT Demo</span>
 						<span class="navbar-title iotf-brand">Device Simulator</span>
 				</div>
 			</div>
@@ -39,9 +39,13 @@
 						<h3>Enter credentials:
 						</h3>
 						<h3>
+							<!--
 							<div class="iot-credentials-label">OrgId</div><input class="iot-credentials-input" id="orgId" type="text" value="" /><br>
 							<div class="iot-credentials-label">API Key</div><input class="iot-credentials-input" id="apiKey" type="text" value="" /><br>
 							<div class="iot-credentials-label">API Token</div><input class="iot-credentials-input" id="apiToken" type="text" value="" /><br>
+							-->
+							<div class="iot-credentials-label">MQTT Server</div><input class="iot-credentials-input" id="mqttHost" type="text" value="localhost" /><br>
+							<div class="iot-credentials-label">Websocket Port</div><input class="iot-credentials-input" id="mqttPort" type="text" value="9001" /><br>
 							<input class="iot-config-button" type="button" value="Confirm" id="button-confirm-credentials" />
 						</h3>
 					</div>
