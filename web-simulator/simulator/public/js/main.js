@@ -60,17 +60,15 @@ function init() {
 var bRandomize = true;
 
 function getTopicName(eventId){
-	return "iot-2/type/"
-		+ model.credentials.typeId
+	return "bahir/iot"
 		+ "/id/"
 		+ model.credentials.deviceId
 		+ "/evt/"
-		+ eventId
-		+"/fmt/json";
+		+ eventId;
 }
 
 function publishWeight() {
-	var res = publishMessage(getTopicName("weight"), model.weight);
+	var res = publishMessage(getTopicName("weight"), model.weight.weight);
 	$("#indicator-weight").addClass("pub");
 	setTimeout(function() { $("#indicator-weight").removeClass("pub"); }, 150);
 	if (res) {
@@ -83,7 +81,7 @@ function publishWeight() {
 }
 
 function publishSpeed() {
-	var res = publishMessage(getTopicName("speed"), model.speed);
+	var res = publishMessage(getTopicName("speed"), model.speed.speed);
 	$("#indicator-speed").addClass("pub");
 	setTimeout(function() { $("#indicator-speed").removeClass("pub"); }, 150);
 	if (res) {
@@ -96,12 +94,12 @@ function publishSpeed() {
 }
 
 function publishPower() {
-	var res = publishMessage(getTopicName("power"), model.power);
+	var res = publishMessage(getTopicName("power"), model.power.power);
 	$("#indicator-power").addClass("pub");
 	setTimeout(function() { $("#indicator-power").removeClass("pub"); }, 150);
 	if (res) {
 		if (bRandomize) {
-			model.power.power += -0.1 + Math.random() * 0.2;
+			model.power.power += Math.abs(-0.1 + Math.random() * 0.2);
 			$('#power').slider('setValue', model.power.power);
 		}
 		setTimeout(publishPower, 500);
@@ -109,7 +107,7 @@ function publishPower() {
 }
 
 function publishTemp() {
-	var res = publishMessage(getTopicName("temp"), model.temp);
+	var res = publishMessage(getTopicName("temp"), model.temp.temp);
 	$("#indicator-temp").addClass("pub");
 	setTimeout(function() { $("#indicator-temp").removeClass("pub"); }, 150);
 	if (res) {
@@ -138,7 +136,7 @@ function publishSys() {
 
 function publishMessage(topic, payload) {
 	try {
-		var message = new Paho.MQTT.Message(JSON.stringify({ d: payload }));
+		var message = new Paho.MQTT.Message(String(payload));
 		message.destinationName = topic;
 		console.log(topic, payload);
 		window.client.send(message);
@@ -226,6 +224,8 @@ function onConnectSuccess() {
 	$(".connectionStatus").html("Connected");
 	$(".connectionStatus").addClass("connected");
 
+	startPublish();
+	/*
 	if (navigator.geolocation) {
 		navigator.geolocation.getCurrentPosition(function(position) {
 			console.log(position);
@@ -234,6 +234,7 @@ function onConnectSuccess() {
 	} else {
 		startPublish();
 	}
+	*/
 }
 
 function onConnectFailure( error ) {
