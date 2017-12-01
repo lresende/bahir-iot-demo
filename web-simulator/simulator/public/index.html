@@ -46,7 +46,7 @@
 							-->
 							<div class="iot-credentials-label">MQTT Server</div><input class="iot-credentials-input" id="mqttHost" type="text" value="localhost" /><br>
 							<div class="iot-credentials-label">Websocket Port</div><input class="iot-credentials-input" id="mqttPort" type="text" value="9001" /><br>
-							<input class="iot-config-button" type="button" value="Confirm" id="button-confirm-credentials" />
+							<input class="iot-config-button" type="button" value="CONNECT" id="button-confirm-credentials" />
 						</h3>
 					</div>
 				</div>
@@ -60,7 +60,7 @@
 					<div class="iot-input-container">
 						<div class="iot-topic-container"><div class="iot-topic"><b>Topic:</b> <code>iot-2/evt/weight/fmt/json</code></div><div class='iot-rate hidden-sm'><b>Rate:</b> <code>2 msgs/sec</code></div><div class='iot-indicator' id="indicator-weight">&nbsp;</div></div>
 						<div class="iot-stat">
-							<div class="iot-sensor-label">Lb</div><input id="weight" data-slider-id='weight-slider' type="text" data-slider-min="-2" data-slider-max="2" data-slider-step="0.01" data-slider-value="0"/>
+							<div class="iot-sensor-label">Lb</div><input id="weight" data-slider-id='weight-slider' type="text" data-slider-min="1" data-slider-max="100" data-slider-step="0.1" data-slider-value="50"/>
 						</div>
 					</div>
 				</div>

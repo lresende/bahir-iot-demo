@@ -73,7 +73,7 @@ function publishWeight() {
 	setTimeout(function() { $("#indicator-weight").removeClass("pub"); }, 150);
 	if (res) {
 		if (bRandomize) {
-			model.weight.weight += -0.1 + Math.random() * 0.2;
+			model.weight.weight += -1 + Math.random() * 2;
 			$('#weight').slider('setValue', model.weight.weight);
 		}
 		setTimeout(publishWeight, 500);
