@@ -18,28 +18,25 @@ name := "spark-iot-analytics"
 
 version := "1.0"
 
-scalaVersion := "2.11.8"
+scalaVersion := "2.11.11"
 
-/*
 resolvers += "Local Maven Repository" at "file://" + Path.userHome.absolutePath + "/.m2/repository"
-*/
 resolvers += "Typesafe Repo" at "http://repo.typesafe.com/typesafe/releases/"
 resolvers += "Sonatype Repository" at "http://oss.sonatype.org/content/repositories/releases"
 
-
 // Spark dependencies as provided as they are available in spark runtime
-val sparkVersion = "2.0.1"
+val sparkVersion = "2.2.0"
+
+libraryDependencies += "org.scala-lang.modules" %% "scala-xml" % "1.0.6"
 
 libraryDependencies += "org.apache.spark" %% "spark-core" % sparkVersion  % "provided"
 libraryDependencies += "org.apache.spark" %% "spark-sql" % sparkVersion  % "provided"
 libraryDependencies += "org.apache.spark" %% "spark-streaming" % sparkVersion  % "provided"
-libraryDependencies += "org.apache.spark" %% "spark-tags" % sparkVersion  //% "provided"
-
-libraryDependencies += "org.scala-lang.modules" %% "scala-xml" % "1.0.6"  //% "provided"
+libraryDependencies += "org.apache.spark" %% "spark-tags" % sparkVersion % "provided"
 
 libraryDependencies += "org.apache.bahir" %% "spark-streaming-mqtt" % sparkVersion % "provided"
 libraryDependencies += "org.apache.bahir" %% "spark-sql-streaming-mqtt" % sparkVersion % "provided"
 
-libraryDependencies += "org.eclipse.paho" % "org.eclipse.paho.client.mqttv3" % "1.0.2" // % "provided"
+libraryDependencies += "org.eclipse.paho" % "org.eclipse.paho.client.mqttv3" % "1.0.2"
 
 assemblyJarName in assembly := "spark-iot-analytics.jar"
