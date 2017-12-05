@@ -24,10 +24,8 @@ if [ -z "$SPARK_HOME" ]; then echo "SPARK_HOME is NOT set"; else echo "SPARK_HOM
 HOSTNAME="$(/bin/hostname -f)"
 SCALA_VERSION=2.11
 
-# sbt clean compile package assembly
-
 echo "Starting Spark Application at $SPARK_HOME"
 
 #weight
-#DStream
-$SPARK_HOME/bin/spark-submit --master spark://$HOSTNAME:7077 --packages org.apache.bahir:spark-streaming-mqtt_2.11:2.2.0 --jars ./lib/org.eclipse.paho.client.mqttv3-1.0.2.jar --class org.apache.bahir.iot.MQTTStreamingApplication  ./target/scala-2.11/spark-iot-analytics_2.11-1.0.jar tcp://localhost:1883 bahir/iot/id/simulator/evt/weight
+#Structured Streaming
+$SPARK_HOME/bin/spark-submit --master spark://$HOSTNAME:7077 --packages org.apache.bahir:spark-sql-streaming-mqtt_2.11:2.2.0 --jars ./lib/org.eclipse.paho.client.mqttv3-1.1.0.jar --class org.apache.bahir.iot.MQTTSQLStreamingApplication  ./target/scala-2.11/spark-iot-analytics_2.11-1.0.jar tcp://localhost:1883 bahir/iot/id/simulator/evt/weight
