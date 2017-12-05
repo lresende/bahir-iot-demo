@@ -31,6 +31,14 @@ cd web-simulator/simulator
 node app.js
 ```
 
+**Note:** When starting for the first time, you need to use npm to install required dependencies
+
+```
+cd web-simulator/simulator
+npm install
+node app.js
+```
+
 Then access the simulator in your browser
 
 ```
