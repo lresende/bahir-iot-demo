@@ -37,6 +37,6 @@ libraryDependencies += "org.apache.spark" %% "spark-tags" % sparkVersion % "prov
 libraryDependencies += "org.apache.bahir" %% "spark-streaming-mqtt" % sparkVersion % "provided"
 libraryDependencies += "org.apache.bahir" %% "spark-sql-streaming-mqtt" % sparkVersion % "provided"
 
-libraryDependencies += "org.eclipse.paho" % "org.eclipse.paho.client.mqttv3" % "1.0.2"
+libraryDependencies += "org.eclipse.paho" % "org.eclipse.paho.client.mqttv3" % "1.2.1"
 
 assemblyJarName in assembly := "spark-iot-analytics.jar"

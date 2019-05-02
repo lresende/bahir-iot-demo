@@ -28,4 +28,4 @@ echo "Starting Spark Application at $SPARK_HOME"
 
 #weight
 #Structured Streaming
-$SPARK_HOME/bin/spark-submit --master spark://$HOSTNAME:7077 --packages org.apache.bahir:spark-sql-streaming-mqtt_2.11:2.2.0 --jars ./lib/org.eclipse.paho.client.mqttv3-1.1.0.jar --class org.apache.bahir.iot.MQTTSQLStreamingApplication  ./target/scala-2.11/spark-iot-analytics_2.11-1.0.jar tcp://localhost:1883 bahir/iot/id/simulator/evt/weight
+$SPARK_HOME/bin/spark-submit --master spark://$HOSTNAME:7077 --packages org.apache.bahir:spark-sql-streaming-mqtt_2.11:2.2.0 --jars ./lib/org.eclipse.paho.client.mqttv3-1.2.1.jar --class org.apache.bahir.iot.MQTTSQLStreamingApplication  ./target/scala-2.11/spark-iot-analytics_2.11-1.0.jar tcp://localhost:1883 bahir/iot/id/simulator/evt/weight
