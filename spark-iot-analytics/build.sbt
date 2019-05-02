@@ -18,7 +18,7 @@ name := "spark-iot-analytics"
 
 version := "1.0"
 
-scalaVersion := "2.11.11"
+scalaVersion := "2.11.12"
 
 resolvers += "Local Maven Repository" at "file://" + Path.userHome.absolutePath + "/.m2/repository"
 resolvers += "Typesafe Repo" at "http://repo.typesafe.com/typesafe/releases/"
