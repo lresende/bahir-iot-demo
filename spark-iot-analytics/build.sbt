@@ -25,7 +25,7 @@ resolvers += "Typesafe Repo" at "http://repo.typesafe.com/typesafe/releases/"
 resolvers += "Sonatype Repository" at "http://oss.sonatype.org/content/repositories/releases"
 
 // Spark dependencies as provided as they are available in spark runtime
-val sparkVersion = "2.2.0"
+val sparkVersion = "2.3.3"
 
 libraryDependencies += "org.scala-lang.modules" %% "scala-xml" % "1.0.6"
 
