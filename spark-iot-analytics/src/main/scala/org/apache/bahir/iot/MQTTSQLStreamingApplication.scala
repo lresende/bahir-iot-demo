@@ -42,12 +42,13 @@ object MQTTSQLStreamingApplication {
         .getOrCreate();
 
     import spark.implicits._
-    
+
     val powerMetrics = spark.readStream
         .format("org.apache.bahir.sql.streaming.mqtt.MQTTStreamSourceProvider")
         .option("topic", topic)
         .load(brokerUrl)
-        .as[(String, Timestamp)]
+        .selectExpr("CAST(id AS INT)", "CAST(topic AS STRING)", "CAST(payload AS STRING)", "timestamp as timestamp")
+        .as[(Int, String, String, Timestamp)]
 
     val query = powerMetrics.writeStream
         .outputMode("append")
